@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://i.pinimg.com/736x/1e/55/a5/1e55a584f7f02fb17ea209607fbc6a7a.jpg">
+    <title>متتبع تمارين الجيم</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #e3f2fd, #ffffff);
+            color: #222;
+            line-height: 1.6;
+            padding: 2vh 4vw;
+            padding-top: 80px; /* Added for fixed navbar */
+        }
+        
+        /* Modern Navigation Bar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.1);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            margin: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #4a6cf7;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #4a6cf7, #2541b2);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            left: 0;
+            right: auto;
+        }
+
+        .nav-links a.active {
+            color: #4a6cf7;
+        }
+
+
+        .mobile-menu-btn {
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #333;
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 1rem;
+                border-radius: 0 0 15px 15px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            border-radius: 2vw;
+            box-shadow: 0 0.5vw 2vw rgba(0, 0, 0, 0.1);
+            padding: 2vw;
+        }
+        
+        h1, h2, h3 {
+            text-align: center;
+            color: #1a237e;
+            margin-bottom: 2vh;
+            font-size: clamp(1.4rem, 2.5vw, 2rem);
+        }
+        
+        /* Tracker Section Styles */
+        .tracker-section {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border-radius: 1.5vw;
+            padding: 2vw;
+            margin-top: 3vh;
+            box-shadow: 0 0.3vw 1vw rgba(0, 0, 0, 0.08);
+        }
+        
+        .tracker-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2vw;
+            align-items: center;
+            margin-bottom: 2vh;
+            padding: 1.5vw;
+            background: #f5f9ff;
+            border-radius: 1vw;
+        }
+        
+        .tracker-date, .tracker-type {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 0.5vw;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        button {
+            font-family: 'Cairo', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tracker-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+        
+        .tracker-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .workout-in-progress {
+            background: #ffffff;
+            border-radius: 1vw;
+            padding: 2vw;
+            margin-top: 2vh;
+            box-shadow: 0 0.3vw 1vw rgba(0, 0, 0, 0.05);
+        }
+        
+        .exercise-tracker {
+            margin-top: 2vh;
+        }
+        
+        .exercise-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2vh;
+            padding-bottom: 1vh;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .sets-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5vh;
+        }
+        
+        .set {
+            display: flex;
+            align-items: center;
+            gap: 1vw;
+            padding: 1vh 1vw;
+            background: #f9f9f9;
+            border-radius: 0.8vw;
+        }
+        
+        .set span {
+            flex: 0.5;
+            font-weight: 500;
+        }
+        
+        .weight-input, .reps-input {
+            flex: 1;
+            padding: 0.8vh 1vw;
+            border: 1px solid #ddd;
+            border-radius: 0.5vw;
+        }
+        
+        .tracker-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3vh;
+        }
+        
+        .action-btn {
+            padding: 0.7rem 1.3rem;
+            border-radius: 25px;
+            border: none;
+            font-weight: 500;
+        }
+        
+        .action-btn.primary {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .workout-history {
+            margin-top: 4vh;
+        }
+        
+        .history-table {
+            overflow-x: auto;
+            margin-top: 2vh;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 1vw;
+            overflow: hidden;
+            box-shadow: 0 0.3vw 1vw rgba(0, 0, 0, 0.08);
+        }
+        
+        th, td {
+            padding: 1em;
+            border-bottom: 1px solid #e0e0e0;
+            text-align: center;
+        }
+        
+        th {
+            background-color: #1976d2;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .details-btn {
+            padding: 0.5rem 1rem;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        
+        .details-btn:hover {
+            background: #45a049;
+        }
+        
+        .export-btn {
+            background: #2e7d32;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            margin-top: 1rem;
+            display: inline-block;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .sets-info {
+            background-color: #e3f2fd;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .required-sets {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 2rem;
+        }
+        
+        .workout-details {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            width: 100%;
+        }
+        
+        .exercises-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .exercise-detail table {
+            width: 100%;
+            margin-top: 0.5rem;
+            border-collapse: collapse;
+        }
+        
+        .exercise-detail th, .exercise-detail td {
+            padding: 0.5rem;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        .exercise-detail th {
+            background-color: #f0f0f0;
+        }
+        
+        .close-details {
+            margin-top: 1.5rem;
+            padding: 0.7rem 1.5rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            display: block;
+            margin-left: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .tracker-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .set {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1vh;
+            }
+            
+            .set span, .weight-input, .reps-input {
+                width: 100%;
+            }
+            
+            .tracker-actions {
+                flex-direction: column;
+                gap: 1vh;
+            }
+            
+            .action-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Modern Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-section">
+                <img src="https://i.pinimg.com/736x/1e/55/a5/1e55a584f7f02fb17ea209607fbc6a7a.jpg" alt="Logo" class="logo-img">
+                <a href="#" class="logo-text">الجد عبده 💪</a>
+            </div>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="workout.html">Workout</a></li>
+                <li><a href="tracker.html">Training Tracker</a></li>
+                <li><a href="streches.html">Stretches</a></li>
+            </ul>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>متتبع تمارين الجيم</h1>
+        <h2>سجل تقدمك في التمارين</h2>
+        
+        <!-- Training Tracker Section -->
+        <section class="tracker-section">
+            <h3>📊 متتبع التمارين</h3>
+            
+            <div class="tracker-controls">
+                <div class="tracker-date">
+                    <label for="workout-date">تاريخ التمرين:</label>
+                    <input type="date" id="workout-date" class="date-input">
+                </div>
+                
+                <div class="tracker-type">
+                    <label for="workout-type">نوع التمرين:</label>
+                    <select id="workout-type" class="type-select">
+                        <option value="push">Push Day (صدر + كتف أمامي + تراي)</option>
+                        <option value="pull">Pull Day (ظهر + بايسبس)</option>
+                        <option value="legs">Legs Day (أرجل)</option>
+                        <option value="full">Full Body (تمرين كامل)</option>
+                    </select>
+                </div>
+                
+                <button id="start-workout" class="tracker-btn">بدء التمرين</button>
+            </div>
+            
+            <div class="workout-in-progress hidden">
+                <h4 id="current-workout-title">Push Day - 01/01/2023</h4>
+                
+                <div class="exercise-tracker">
+                    <div class="exercise-header">
+                        <h5 id="current-exercise">Barbell Bench Press</h5>
+                        <span id="exercise-progress">1/7 تمارين</span>
+                    </div>
+                    
+                    <div class="sets-container">
+                        <!-- Sets will be added here dynamically -->
+                    </div>
+                    
+                    <div class="tracker-actions">
+                        <button id="add-set" class="action-btn">إضافة مجموعة</button>
+                        <button id="next-exercise" class="action-btn primary">تمرين التالي</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="workout-history">
+                <h4>سجل التمارين السابقة</h4>
+                <button id="export-excel" class="export-btn">تصدير إلى Excel</button>
+                <div class="history-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>التاريخ</th>
+                                <th>نوع التمرين</th>
+                                <th>عدد التمارين</th>
+                                <th>التفاصيل</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-body">
+                            <!-- Workout history will be added dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Service Worker Registration for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => {
+                        console.log('✅ Service Worker registered:', registration);
+                    })
+                    .catch(error => {
+                        console.log('❌ Service Worker registration failed:', error);
+                    });
+            });
+        }
+
+        // Cache Name and Assets for Service Worker
+        const cacheName = "abdo-training-v1";
+        const assets = [
+            "/",
+            "/index.html",
+            "/style.css",
+            "/manifest.json",
+            "https://i.pinimg.com/736x/1e/55/a5/1e55a584f7f02fb17ea209607fbc6a7a.jpg"
+        ];
+
+        // Service Worker Installation
+        self.addEventListener("install", (e) => {
+            e.waitUntil(
+                caches.open(cacheName).then((cache) => {
+                    console.log('📦 Caching assets');
+                    return cache.addAll(assets);
+                })
+            );
+        });
+
+        // Service Worker Fetch Event
+        self.addEventListener("fetch", (e) => {
+            e.respondWith(
+                caches.match(e.request).then((res) => {
+                    return res || fetch(e.request);
+                })
+            );
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // ========== Mobile Navigation ==========
+            const menuBtn = document.getElementById("mobileMenuBtn");
+            const navLinks = document.getElementById("navLinks");
+
+            if (menuBtn && navLinks) {
+                menuBtn.addEventListener("click", () => {
+                    navLinks.classList.toggle("active");
+                    menuBtn.textContent = navLinks.classList.contains("active") ? "✕" : "☰";
+                });
+            }
+
+            // ========== Smooth Scrolling ==========
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Close mobile menu if open
+                    if (navLinks.classList.contains("active")) {
+                        navLinks.classList.remove("active");
+                        menuBtn.textContent = "☰";
+                    }
+
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                        const targetPosition = targetElement.offsetTop - navbarHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // ========== Tracker Functionality ==========
+            const startBtn = document.getElementById('start-workout');
+            const workoutSection = document.querySelector('.workout-in-progress');
+            const workoutTitle = document.getElementById('current-workout-title');
+            const currentExercise = document.getElementById('current-exercise');
+            const exerciseProgress = document.getElementById('exercise-progress');
+            const setsContainer = document.querySelector('.sets-container');
+            const addSetBtn = document.getElementById('add-set');
+            const nextExerciseBtn = document.getElementById('next-exercise');
+            const historyBody = document.getElementById('history-body');
+            const exportBtn = document.getElementById('export-excel');
+            
+            // Workout data
+            let currentWorkout = {
+                date: new Date().toISOString().split('T')[0],
+                type: 'push',
+                exercises: [],
+                currentExerciseIndex: 0
+            };
+            
+            // Exercise lists for each workout type
+            const workoutExercises = {
+                push: [
+                    'Barbell Bench Press',
+                    'Smith Incline Dumbbell Press',
+                    'Seated Shoulder Press',
+                    'Chest Fly',
+                    'Lateral Raises',
+                    'Triceps Pushdown',
+                    'Overhead Dumbbell Extension'
+                ],
+                pull: [
+                    'Deadlift',
+                    'Lat Pulldown / Pull-ups',
+                    'Seated Cable Row',
+                    'Barbell Row',
+                    'Face Pulls',
+                    'Machine Preacher Curl',
+                    'Hammer Curl'
+                ],
+                legs: [
+                    'Squats',
+                    'Leg Press',
+                    'Romanian Deadlift',
+                    'Leg Curls',
+                    'Leg Extension',
+                    'Calf Raises',
+                    'Seated Calf Raises'
+                ],
+                full: [
+                    'Chest Press Machine',
+                    'Chest Flies Machine',
+                    'Wide Lat Pulldown',
+                    'Wide Seated Cable Row',
+                    'Lateral Raises',
+                    'Dumbbell Bi Curl',
+                    'Rope Tri pushdown'
+                ]
+            };
+            
+            // عدد المجموعات المطلوبة لكل تمرين
+            const requiredSets = {
+                push: [4, 3, 3, 3, 3, 3, 2],
+                pull: [3, 4, 3, 3, 3, 3, 2],
+                legs: [4, 3, 3, 3, 3, 2, 4],
+                full: [3, 3, 3, 3, 3, 3, 3]
+            };
+            
+            // Initialize tracker
+            function initTracker() {
+                const dateInput = document.getElementById('workout-date');
+                const typeSelect = document.getElementById('workout-type');
+                
+                // Set today's date as default
+                dateInput.value = currentWorkout.date;
+                
+                // Load workout history from localStorage
+                loadWorkoutHistory();
+                
+                // Event listeners
+                startBtn.addEventListener('click', startWorkout);
+                addSetBtn.addEventListener('click', addSet);
+                nextExerciseBtn.addEventListener('click', nextExercise);
+                dateInput.addEventListener('change', updateWorkoutDate);
+                typeSelect.addEventListener('change', updateWorkoutType);
+                exportBtn.addEventListener('click', exportToExcel);
+            }
+            
+            // Start workout
+            function startWorkout() {
+                currentWorkout.exercises = workoutExercises[currentWorkout.type].map(ex => ({
+                    name: ex,
+                    sets: []
+                }));
+                
+                currentWorkout.currentExerciseIndex = 0;
+                updateWorkoutDisplay();
+                workoutSection.classList.remove('hidden');
+                startBtn.disabled = true;
+            }
+            
+            // Update workout display
+            function updateWorkoutDisplay() {
+                const currentEx = currentWorkout.exercises[currentWorkout.currentExerciseIndex];
+                workoutTitle.textContent = `${getWorkoutTypeName(currentWorkout.type)} - ${formatDate(currentWorkout.date)}`;
+                currentExercise.textContent = currentEx.name;
+                exerciseProgress.textContent = `${currentWorkout.currentExerciseIndex + 1}/${currentWorkout.exercises.length} تمارين`;
+                
+                // Clear sets container
+                setsContainer.innerHTML = '';
+                
+                // Add sets info
+                const setsInfo = document.createElement('div');
+                setsInfo.className = 'sets-info';
+                setsInfo.innerHTML = `عدد المجموعات المطلوبة: <span class="required-sets">${requiredSets[currentWorkout.type][currentWorkout.currentExerciseIndex]}</span>`;
+                setsContainer.appendChild(setsInfo);
+                
+                // Add sets
+                currentEx.sets.forEach((set, i) => {
+                    addSetToDisplay(set.weight, set.reps, i + 1);
+                });
+                
+                // Add at least one empty set if none exists
+                if (currentEx.sets.length === 0) {
+                    addSetToDisplay('', '', 1);
+                }
+            }
+            
+            // Add set to display
+            function addSetToDisplay(weight, reps, setNumber) {
+                const setDiv = document.createElement('div');
+                setDiv.className = 'set';
+                setDiv.innerHTML = `
+                    <span>المجموعة ${setNumber}</span>
+                    <input type="number" placeholder="الوزن (كجم)" class="weight-input" value="${weight || ''}">
+                    <input type="number" placeholder="التكرارات" class="reps-input" value="${reps || ''}">
+                `;
+                setsContainer.appendChild(setDiv);
+            }
+            
+            // Add new set
+            function addSet() {
+                const currentEx = currentWorkout.exercises[currentWorkout.currentExerciseIndex];
+                currentEx.sets.push({ weight: '', reps: '' });
+                updateWorkoutDisplay();
+            }
+            
+            // Move to next exercise
+            function nextExercise() {
+                // التحقق من إدخال البيانات المطلوبة
+                const required = requiredSets[currentWorkout.type][currentWorkout.currentExerciseIndex];
+                const weightInputs = document.querySelectorAll('.weight-input');
+                const repsInputs = document.querySelectorAll('.reps-input');
+                
+                let filledSets = 0;
+                for (let i = 0; i < weightInputs.length; i++) {
+                    if (weightInputs[i].value && repsInputs[i].value) {
+                        filledSets++;
+                    }
+                }
+                
+                if (filledSets < required) {
+                    alert(`يجب إدخال بيانات ${required} مجموعات على الأقل لهذا التمرين`);
+                    return;
+                }
+                
+                // Save current sets
+                const currentEx = currentWorkout.exercises[currentWorkout.currentExerciseIndex];
+                currentEx.sets = [];
+                
+                for (let i = 0; i < weightInputs.length; i++) {
+                    const weight = weightInputs[i].value;
+                    const reps = repsInputs[i].value;
+                    
+                    if (weight && reps) {
+                        currentEx.sets.push({
+                            weight: weight,
+                            reps: reps
+                        });
+                    }
+                }
+                
+                // حفظ البيانات في localStorage
+                saveWorkout();
+                
+                // Move to next exercise or finish workout
+                if (currentWorkout.currentExerciseIndex < currentWorkout.exercises.length - 1) {
+                    currentWorkout.currentExerciseIndex++;
+                    updateWorkoutDisplay();
+                } else {
+                    finishWorkout();
+                }
+            }
+            
+            // Finish workout
+            function finishWorkout() {
+                // Save workout to history
+                saveWorkout();
+                
+                // Reset UI
+                workoutSection.classList.add('hidden');
+                startBtn.disabled = false;
+                
+                // Show success message
+                alert('تم إكمال التمرين بنجاح! تم حفظ النتائج.');
+            }
+            
+            // Save workout to localStorage
+            function saveWorkout() {
+                let workouts = JSON.parse(localStorage.getItem('workoutHistory')) || [];
+                
+                // Filter out empty sets
+                currentWorkout.exercises.forEach(ex => {
+                    ex.sets = ex.sets.filter(set => set.weight && set.reps);
+                });
+                
+                workouts.push(currentWorkout);
+                localStorage.setItem('workoutHistory', JSON.stringify(workouts));
+                
+                // Update history display
+                loadWorkoutHistory();
+            }
+            
+            // Load workout history
+            function loadWorkoutHistory() {
+                const workouts = JSON.parse(localStorage.getItem('workoutHistory')) || [];
+                historyBody.innerHTML = '';
+                
+                workouts.reverse().forEach(workout => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${formatDate(workout.date)}</td>
+                        <td>${getWorkoutTypeName(workout.type)}</td>
+                        <td>${workout.exercises.length}</td>
+                        <td><button class="details-btn" data-date="${workout.date}" data-type="${workout.type}">عرض التفاصيل</button></td>
+                    `;
+                    historyBody.appendChild(row);
+                });
+                
+                // Add event listeners to details buttons
+                document.querySelectorAll('.details-btn').forEach(btn => {
+                    btn.addEventListener('click', showWorkoutDetails);
+                });
+            }
+            
+            // Show workout details
+            function showWorkoutDetails(e) {
+                const date = e.target.dataset.date;
+                const type = e.target.dataset.type;
+                
+                const workouts = JSON.parse(localStorage.getItem('workoutHistory')) || [];
+                const workout = workouts.find(w => w.date === date && w.type === type);
+                
+                if (workout) {
+                    let detailsHtml = `
+                        <div class="workout-details">
+                            <h4>${getWorkoutTypeName(type)} - ${formatDate(date)}</h4>
+                            <div class="exercises-list">
+                    `;
+                    
+                    workout.exercises.forEach((ex, exIndex) => {
+                        detailsHtml += `
+                            <div class="exercise-detail">
+                                <h5>${ex.name} (${requiredSets[type][exIndex]} مجموعات مطلوبة)</h5>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>المجموعة</th>
+                                            <th>الوزن (كجم)</th>
+                                            <th>التكرارات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                        `;
+                        
+                        const required = requiredSets[type][exIndex];
+                        for (let i = 0; i < required; i++) {
+                            const set = ex.sets[i] || { weight: '--', reps: '--' };
+                            detailsHtml += `
+                                <tr>
+                                    <td>${i + 1}</td>
+                                    <td>${set.weight}</td>
+                                    <td>${set.reps}</td>
+                                </tr>
+                            `;
+                        }
+                        
+                        detailsHtml += `
+                                    </tbody>
+                                </table>
+                            </div>
+                        `;
+                    });
+                    
+                    detailsHtml += `
+                            </div>
+                            <button class="close-details">إغلاق</button>
+                        </div>
+                    `;
+                    
+                    // Create and show modal
+                    const modal = document.createElement('div');
+                    modal.className = 'modal-overlay';
+                    modal.innerHTML = detailsHtml;
+                    document.body.appendChild(modal);
+                    
+                    // Add close event
+                    modal.querySelector('.close-details').addEventListener('click', () => {
+                        document.body.removeChild(modal);
+                    });
+                }
+            }
+            
+            // Export to Excel
+            function exportToExcel() {
+                const workouts = JSON.parse(localStorage.getItem('workoutHistory')) || [];
+                
+                if (workouts.length === 0) {
+                    alert('لا توجد بيانات للتصدير!');
+                    return;
+                }
+                
+                // Create Excel file (CSV format)
+                let csvContent = "data:text/csv;charset=utf-8,";
+                
+                // Add Arabic header with UTF-8 BOM for Excel
+                csvContent = "\uFEFF"; // BOM for UTF-8
+                csvContent += "التاريخ,نوع التمرين,التمرين,المجموعة,الوزن (كجم),التكرارات\n";
+                
+                // Add workout data
+                workouts.forEach(workout => {
+                    workout.exercises.forEach((exercise, exIndex) => {
+                        const required = requiredSets[workout.type][exIndex];
+                        
+                        for (let i = 0; i < required; i++) {
+                            const set = exercise.sets[i] || { weight: '', reps: '' };
+                            csvContent += `${formatDate(workout.date)},${getWorkoutTypeName(workout.type)},${exercise.name},${i + 1},${set.weight},${set.reps}\n`;
+                        }
+                    });
+                });
+                
+                // Create download link
+                const encodedUri = encodeURI(csvContent);
+                const link = document.createElement("a");
+                link.setAttribute("href", encodedUri);
+                link.setAttribute("download", `سجل_تمارين_${new Date().toISOString().split('T')[0]}.csv`);
+                document.body.appendChild(link);
+                
+                // Trigger download
+                link.click();
+                
+                // Clean up
+                document.body.removeChild(link);
+            }
+            
+            // Update workout date
+            function updateWorkoutDate(e) {
+                currentWorkout.date = e.target.value;
+            }
+            
+            // Update workout type
+            function updateWorkoutType(e) {
+                currentWorkout.type = e.target.value;
+            }
+            
+            // Helper: Get workout type name
+            function getWorkoutTypeName(type) {
+                const names = {
+                    push: 'Push Day',
+                    pull: 'Pull Day',
+                    legs: 'Legs Day',
+                    full: 'Full Body'
+                };
+                return names[type] || type;
+            }
+            
+            // Helper: Format date
+            function formatDate(dateStr) {
+                const date = new Date(dateStr);
+                return date.toLocaleDateString('ar-EG');
+            }
+            
+            // Initialize
+            initTracker();
+        });
+    </script>
+</body>
+</html>

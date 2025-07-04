@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="https://i.pinimg.com/736x/1e/55/a5/1e55a584f7f02fb17ea209607fbc6a7a.jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <title>PPL + Upper Body</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        font-size: clamp(12px, 1.2vw, 16px);
+      }
+
+      body {
+        font-family: 'Cairo', sans-serif;
+        background: linear-gradient(135deg, #e3f2fd, #ffffff);
+        color: #222;
+        line-height: 1.6;
+        padding: 2vh 4vw;
+      }
+
+      /* Modern Navigation Bar */
+      .navbar {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .logo-img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #667eea;
+        transition: transform 0.3s ease;
+      }
+
+      .logo-img:hover {
+        transform: scale(1.1);
+      }
+
+      .logo-text {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #333;
+        text-decoration: none;
+      }
+
+      .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            margin: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #4a6cf7;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #4a6cf7, #2541b2);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            left: 0;
+            right: auto;
+        }
+
+        .nav-links a.active {
+            color: #4a6cf7;
+        }
+
+      .mobile-menu-btn {
+        font-size: 1.8rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #333;
+        display: none;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .nav-links {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            flex-direction: column;
+            padding: 1rem;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links.active {
+            display: flex;
+        }
+
+        .mobile-menu-btn {
+            display: block;
+        }
+      }
+
+      .container {
+        max-width: 100%;
+        margin: auto;
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(12px);
+        border-radius: 2vw;
+        box-shadow: 0 0.5vw 2vw rgba(0, 0, 0, 0.1);
+        padding: 2vw;
+        margin-top: 80px; /* Added to account for fixed navbar */
+      }
+
+      /* Headings */
+      h1, h2, h3 {
+        text-align: center;
+        color: #1a237e;
+        margin-bottom: 2vh;
+        font-size: clamp(1.4rem, 2.5vw, 2rem);
+      }
+
+      /* Week Distribution Flex Grid */
+      .week-distribution {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2vw;
+        justify-content: space-between;
+        margin-bottom: 4vh;
+      }
+
+      .day {
+        flex: 1 1 calc(25% - 1vw);
+        min-width: 180px;
+        background: linear-gradient(135deg, #bbdefb, #e3f2fd);
+        padding: 1.5vw;
+        border-radius: 1.5vw;
+        text-align: center;
+        box-shadow: 0 0.3vw 1vw rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+      }
+
+      .day:hover {
+        transform: translateY(-0.5vw);
+      }
+
+      .day span {
+        display: block;
+        margin-top: 1vh;
+        font-weight: 600;
+        color: #0d47a1;
+      }
+
+      /* Table Wrapper */
+      .table-wrapper {
+        overflow-x: auto;
+        width: 100%;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 2vh;
+        background-color: white;
+        border-radius: 1vw;
+        overflow: hidden;
+        box-shadow: 0 0.3vw 1vw rgba(0, 0, 0, 0.08);
+        font-size: clamp(0.75rem, 1.1vw, 1rem);
+      }
+
+      th, td {
+        padding: 1em;
+        border-bottom: 1px solid #e0e0e0;
+        text-align: center;
+      }
+
+      th {
+        background-color: #1976d2;
+        color: white;
+        font-weight: 600;
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      /* Images */
+      .exercise-img {
+        width: clamp(60px, 10vw, 100px);
+        height: auto;
+        border-radius: 1vw;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .exercise-img:hover {
+        transform: scale(1.05);
+      }
+
+      /* Instructions */
+      .instructions {
+        background: linear-gradient(135deg, #e3f2fd, #ffffff);
+        padding: 1.5rem;
+        border-radius: 1vw;
+        margin: 2vh 0;
+        box-shadow: 0 0.3vw 1vw rgba(0, 0, 0, 0.05);
+      }
+
+      .instructions ul {
+        padding-right: 1.5rem;
+      }
+
+      .instructions li {
+        margin-bottom: 0.5rem;
+      }
+      
+      /* Media Queries */
+      @media (max-width: 992px) {
+        .day {
+            flex: 1 1 calc(33.333% - 1vw);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .day {
+            flex: 1 1 calc(50% - 1vw);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .day {
+            flex: 1 1 100%;
+        }
+
+        h1, h2, h3 {
+            font-size: clamp(1.2rem, 5vw, 1.5rem);
+        }
+
+        th, td {
+            padding: 0.8em;
+        }
+
+        .exercise-img {
+            width: 80px;
+        }
+      }
+    </style>
+  
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json" />
+  
+    <!-- iOS Support -->
+    <link rel="apple-touch-icon" href="https://i.pinimg.com/736x/1e/55/a5/1e55a584f7f02fb17ea209607fbc6a7a.jpg">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+  </head>
+  
+<body>
+  <!-- Modern Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo-section">
+        <img src="https://i.pinimg.com/736x/1e/55/a5/1e55a584f7f02fb17ea209607fbc6a7a.jpg" alt="Logo" class="logo-img">
+        <a href="#" class="logo-text">الجد عبده 💪</a>
+      </div>
+      
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="workout.html">Workout</a></li>
+        <li><a href="tracker.html">Training Tracker</a></li>
+        <li><a href="streches.html">Stretches</a></li>
+      </ul>
+      
+      <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+    </div>
+  </nav>
+  
+  <div class="container" id="home">
+    <h1>خطة تمرين عبده 👑</h1>
+    <h2>PPL + Upper Body</h2>
+
+    <section class="week-distribution">
+      <h3>📅 توزيع الأسبوع</h3>
+      <table>
+        <thead>
+          <tr><th>اليوم</th><th>نوع التمرين</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>الإثنين</td><td>Push (صدر + كتف أمامي + تراي)</td></tr>
+          <tr><td>الثلاثاء</td><td>Pull (ظهر + بايسبس)</td></tr>
+          <tr><td>الأربعاء</td><td>راحة 💤</td></tr>
+          <tr><td>الخميس</td><td>Legs (أرجل)</td></tr>
+          <tr><td>الجمعة</td><td>راحة 💤</td></tr>
+          <tr><td>السبت</td><td>Full Body (تمرين كامل للجسم)</td></tr>
+          <tr><td>الأحد</td><td>راحة</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Push Day Stretches -->
+    <section id="push-stretches" loading="lazy">
+      <h3>🟥 استرتشات يوم الدفع (Push: صدر، كتف أمامي وجانبي، ترايسبس)</h3>
+      <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>التمرين</th>
+            <th>العضلات المستهدفة</th>
+            <th>شرح الأداء</th>
+            <th>المجموعات × المدة</th>
+            <th>صورة توضيحية</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Chest Stretch on Wall</td>
+            <td>عضلة الصدر (Pec Major)</td>
+            <td>قف جنب الحائط، ضع يدك على الحائط بزاوية 90° ولف جسمك بعيد عن الذراع حتى تحس بتمدد</td>
+            <td>2 × 20-30 ثانية</td>
+            <td><img src="https://www.inspireusafoundation.org/wp-content/uploads/2023/09/doorway-chest-stretch.gif" alt="Chest Stretch" class="exercise-img" /></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Overhead Triceps Stretch</td>
+            <td>الترايسيبس</td>
+            <td>ارفع ذراعك فوق راسك وثني كوعك، وساعدك التاني يشد الكوع للداخل</td>
+            <td>2 × 20-30 ثانية</td>
+            <td><img src="https://www.inspireusafoundation.org/wp-content/uploads/2023/08/overhead-tricep-stretch.gif" alt="Triceps Stretch" class="exercise-img" /></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Anterior Shoulder Stretch (Doorway)</td>
+            <td>الكتف الأمامي</td>
+            <td>افتح باب وقف فيه، وضع ذراعيك على الجوانب وادفع صدرك للأمام</td>
+            <td>2 × 20-30 ثانية</td>
+            <td><img src="https://www.inspireusafoundation.org/wp-content/uploads/2022/12/cross-chest-shoulder-stretch.gif" alt="Shoulder Stretch" class="exercise-img" /></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Side Neck Stretch</td>
+            <td>عضلات الرقبة الجانبية</td>
+            <td>ميل راسك على جنب واسحب بإيدك التانية بلطف</td>
+            <td>2 × 20-30 ثانية</td>
+            <td><img src="https://images.squarespace-cdn.com/content/v1/5d31ed671abe780001b2964d/1588722502308-ZDLLAKOA8XNL846F5KM1/4.gif" alt="Neck Stretch" class="exercise-img" /></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Wrist Flexor Stretch</td>
+            <td>الساعد</td>
+            <td>مد ذراعك للأمام، وكفك لتحت واسحب بصوابعك التانية</td>
+            <td>2 × 20-30 ثانية</td>
+            <td><img src="https://www.nerdfitness.com/wp-content/uploads/2018/08/wrist-stretch-5.gif" alt="Wrist Stretch" class="exercise-img" /></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <!-- Pull Day Stretches -->
+    <section id="pull-stretches" loading="lazy">
+      <h3>🟩 استرتشات يوم السحب (Pull: ظهر، كتف خلفي، بايسبس)</h3>
+      <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>التمرين</th>
+            <th>العضلات المستهدفة</th>
+            <th>شرح الأداء</th>
+            <th>المجموعات × المدة</th>
+            <th>صورة توضيحية</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Child's Pose Stretch</td>
+            <td>أسفل الظهر</td>
+            <td>اركع وامد ذراعك للأمام على الأرض وخلي صدرك يلمس الأرض</td>
+            <td>2 × 20-30 ثانية</td>
+            <td><img src="https://assets.myworkouts.io/exercises-media/9M4J9fs7ArWFYEXwh/child's_pose_male_v12_gif_capon.gif" alt="Child's Pose" class="exercise-img" /></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Doorframe Lat Stretch</td>
+            <td>عضلات الظهر العلوية (Lats)</td>
+            <td>امسك إطار الباب بيدك وشد جسمك للخلف لتتمدد العضلة</td>
+            <td>2 × 20-30 ثانية</td>
+            <td><img src="https://www.inspireusafoundation.org/wp-content/uploads/2023/09/wall-lat-stretch.gif" alt="Lat Stretch" class="exercise-img" /></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Cross-Body Shoulder Stretch</td>
+            <td>الكتف الخلفي</td>
+            <td>امسك كوع ذراعك وشده على صدرك بعرض الجسم</td>
+            <td>2 × 20-30 ثانية</td>
+            <td><img src="https://www.inspireusafoundation.org/wp-content/uploads/2022/12/cross-chest-shoulder-stretch.gif" alt="Shoulder Stretch" class="exercise-img" /></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Cat-Cow Stretch</td>
+            <td>العمود الفقري</td>
+            <td>وضعية على 4 أطراف، قوس ظهرك فوق لتعمل "Cat" ثم لتحت تعمل "Cow"</td>
+            <td>2 × 20-30 ثانية</td>
+            <td><img src="https://homeworkouts.org/wp-content/uploads/anim-cat-cow-pose.gif" alt="Cat-Cow Stretch" class="exercise-img" /></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Neck Retraction Stretch</td>
+            <td>الرقبة والظهر العلوي</td>
+            <td>اسحب راسك للخلف كأنك بتعمل double chin واستمر 5 ثواني وكرر</td>
+            <td>2 × 20-30 ثانية</td>
+            <td><img src="https://i.pinimg.com/originals/9e/1e/9e/9e1e9e3e3c3b3c3b3c3b3c3b3c3b3c3.jpg" alt="Neck Stretch" class="exercise-img" /></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <!-- Legs Day Stretches -->
+    <section id="legs-stretches" loading="lazy">
+      <h3>🟦 استرتشات يوم الرجل والبطن (Legs + Abs)</h3>
+      <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>التمرين</th>
+            <th>العضلات المستهدفة</th>
+            <th>شرح الأداء</th>
+            <th>المجموعات × المدة</th>
+            <th>صورة توضيحية</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Standing Quad Stretch</td>
+            <td>عضلة الفخذ الأمامية (Quadriceps)</td>
+            <td>امسك مشط رجلك ورا وحاول تلمسه بمؤخرتك، حافظ على توازنك</td>
+            <td>2 × 20-30 ثانية</td>
+            <td><img src="https://i.pinimg.com/originals/9e/1e/9e/9e1e9e3e3c3b3c3b3c3b3c3b3c3b3c3.jpg" alt="Quad Stretch" class="exercise-img" /></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Seated Hamstring Stretch</td>
+            <td>عضلة الفخذ الخلفية (Hamstrings)</td>
+            <td>اجلس ومد رجل وعدل ظهرك وانحني عليها بهدوء</td>
+            <td>2 × 20-30 ثانية</td>
+            <td><img src="https://i.pinimg.com/originals/9e/1e/9e/9e1e9e3e3c3b3c3b3c3b3c3b3c3b3c3.jpg" alt="Hamstring Stretch" class="exercise-img" /></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Figure-4 Stretch (Glutes)</td>
+            <td>المؤخرة (Gluteus Maximus)</td>
+            <td>اجلس على الأرض، ضع كاحل رجل على فخذ الرجل الثانية، واسحب الركبة ناحيتك</td>
+            <td>2 × 20-30 ثانية</td>
+            <td><img src="https://i.pinimg.com/originals/9e/1e/9e/9e1e9e3e3c3b3c3b3c3b3c3b3c3b3c3.jpg" alt="Glute Stretch" class="exercise-img" /></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Hip Flexor Stretch (Lunge Pose)</td>
+            <td>عضلات الورك الأمامية</td>
+            <td>وضعية الاندفاع مع شد الحوض للأمام مع ظهر مستقيم</td>
+            <td>2 × 20-30 ثانية</td>
+            <td><img src="https://i.pinimg.com/originals/9e/1e/9e/9e1e9e3e3c3b3c3b3c3b3c3b3c3b3c3.jpg" alt="Hip Flexor Stretch" class="exercise-img" /></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Cobra Stretch</td>
+            <td>البطن وعضلات العمود الفقري</td>
+            <td>استلقي على بطنك وادفع بيديك لرفع صدرك للأعلى</td>
+            <td>2 × 20-30 ثانية</td>
+            <td><img src="https://i.pinimg.com/originals/9e/1e/9e/9e1e9e3e3c3b3c3b3c3b3c3b3c3b3c3.jpg" alt="Cobra Stretch" class="exercise-img" /></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <!-- تعليمات عامة -->
+    <section id="stretching-instructions">
+      <h3>✅ تعليمات عامة للاسترتشات</h3>
+      <div class="instructions">
+        <ul>
+          <li>كل تمرين خليه 20-30 ثانية × مرتين لكل جهة</li>
+          <li>تنفس ببطء وعمق أثناء التمدد</li>
+          <li>لا توصل للمرحلة اللي تحس فيها بألم، فقط شد مريح</li>
+          <li>يفضل تعملها بعد التمرين مباشرة أو بعده بـ10-20 دقيقة</li>
+          <li>ركز على التمدد الصحيح بدلًا من المدة الطويلة</li>
+        </ul>
+      </div>
+    </section>
+
+  
+
+  <script>
+    // Service Worker Registration for PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(registration => {
+            console.log('✅ Service Worker registered:', registration);
+          })
+          .catch(error => {
+            console.log('❌ Service Worker registration failed:', error);
+          });
+      });
+    }
+
+    // Cache Name and Assets for Service Worker
+    const cacheName = "abdo-training-v1";
+    const assets = [
+      "/",
+      "/index.html",
+      "/style.css",
+      "/manifest.json",
+      "https://i.pinimg.com/736x/1e/55/a5/1e55a584f7f02fb17ea209607fbc6a7a.jpg"
+    ];
+
+    // Service Worker Installation
+    self.addEventListener("install", (e) => {
+      e.waitUntil(
+        caches.open(cacheName).then((cache) => {
+          console.log('📦 Caching assets');
+          return cache.addAll(assets);
+        })
+      );
+    });
+
+    // Service Worker Fetch Event
+    self.addEventListener("fetch", (e) => {
+      e.respondWith(
+        caches.match(e.request).then((res) => {
+          return res || fetch(e.request);
+        })
+      );
+    });
+
+    // DOM Content Loaded - Main Application Logic
+    document.addEventListener('DOMContentLoaded', function() {
+      // ========== Theme Toggle Functionality ==========
+      function setupThemeToggle() {
+        const themeToggle = document.getElementById('themeToggle');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // Check for saved user preference or use system preference
+        const currentTheme = localStorage.getItem('theme') || 
+                            (prefersDarkScheme.matches ? 'dark' : 'light');
+        
+        // Apply the current theme
+        if (currentTheme === 'dark') {
+          document.body.classList.add('dark-mode');
+        }
+        
+        // Toggle theme on button click
+        if (themeToggle) {
+          themeToggle.addEventListener('click', () => {
+            const isDark = document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+          });
+        }
+        
+        // Listen for system theme changes
+        prefersDarkScheme.addListener(e => {
+          if (!localStorage.getItem('theme')) {
+            document.body.classList.toggle('dark-mode', e.matches);
+          }
+        });
+      }
+
+      // ========== Mobile Navigation ==========
+      function setupMobileNavigation() {
+        const menuBtn = document.querySelector(".mobile-menu-btn");
+        const navLinks = document.querySelector(".nav-links");
+
+        if (menuBtn && navLinks) {
+          menuBtn.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+            menuBtn.textContent = navLinks.classList.contains("active") ? "✕" : "☰";
+          });
+        }
+      }
+
+      // ========== Smooth Scrolling ==========
+      function setupSmoothScrolling() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Close mobile menu if open
+            const navLinks = document.querySelector(".nav-links");
+            const menuBtn = document.querySelector(".mobile-menu-btn");
+            if (navLinks && navLinks.classList.contains("active")) {
+              navLinks.classList.remove("active");
+              if (menuBtn) menuBtn.textContent = "☰";
+            }
+
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              const navbar = document.querySelector('.navbar');
+              const navbarHeight = navbar ? navbar.offsetHeight : 0;
+              const targetPosition = targetElement.offsetTop - navbarHeight;
+              
+              window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+              });
+            }
+          });
+        });
+      }
+
+      // ========== Active Section Highlighting ==========
+      function setupActiveSectionHighlight() {
+        window.addEventListener('scroll', function() {
+          const scrollPosition = window.scrollY;
+          const navbar = document.querySelector('.navbar');
+          const navbarHeight = navbar ? navbar.offsetHeight : 0;
+          
+          document.querySelectorAll('section[id]').forEach(section => {
+            const sectionTop = section.offsetTop - navbarHeight - 20;
+            const sectionBottom = sectionTop + section.offsetHeight;
+            
+            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+              const id = section.getAttribute('id');
+              document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${id}`) {
+                  link.classList.add('active');
+                }
+              });
+            }
+          });
+        });
+      }
+
+      // ========== Lazy Loading Images ==========
+      function setupLazyLoading() {
+        const lazyImages = document.querySelectorAll('.exercise-img');
+        
+        if ('IntersectionObserver' in window) {
+          const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src || img.src;
+                img.removeAttribute('data-src');
+                observer.unobserve(img);
+              }
+            });
+          });
+
+          lazyImages.forEach(img => {
+            if (img.dataset.src) {
+              imageObserver.observe(img);
+            }
+          });
+        }
+      }
+
+      // ========== PWA Install Prompt ==========
+      function setupPWAInstallPrompt() {
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+          e.preventDefault();
+          deferredPrompt = e;
+          
+          const installButton = document.getElementById('installButton');
+          if (installButton) {
+            installButton.style.display = 'block';
+            installButton.addEventListener('click', () => {
+              deferredPrompt.prompt();
+              deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                  console.log('User accepted the install prompt');
+                } else {
+                  console.log('User dismissed the install prompt');
+                }
+                deferredPrompt = null;
+              });
+            });
+          }
+        });
+      }
+
+      // Initialize all functionality
+      setupThemeToggle();
+      setupMobileNavigation();
+      setupSmoothScrolling();
+      setupActiveSectionHighlight();
+      setupLazyLoading();
+      setupPWAInstallPrompt();
+    });
+  </script>
+</body>
+</html>

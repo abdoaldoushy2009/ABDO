@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="https://i.pinimg.com/736x/1e/55/a5/1e55a584f7f02fb17ea209607fbc6a7a.jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>الجد عبده - الصفحة الرئيسية</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #4a6cf7;
+            --primary-dark: #2541b2;
+            --secondary-color: #1a237e;
+            --text-color: #222;
+            --light-text: #666;
+            --bg-color: #f5f7fa;
+            --white: #ffffff;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 1rem;
+            
+            /* Dynamic sizing variables */
+            --base-size: clamp(12px, 1.5vw, 16px);
+            --h1-size: clamp(1.8rem, 5vw, 3.5rem);
+            --h2-size: clamp(1.5rem, 3vw, 2.5rem);
+            --h3-size: clamp(1.2rem, 2.5vw, 2rem);
+            --text-size: clamp(0.9rem, 1.2vw, 1rem);
+            --small-text: clamp(0.8rem, 1vw, 0.9rem);
+            --container-width: min(95%, 1400px);
+            --section-padding: clamp(2rem, 5vw, 4rem);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: var(--base-size);
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, var(--bg-color), #e4e8f0);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Modern Navigation Bar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: var(--transition);
+            padding: clamp(0.25rem, 1vw, 0.5rem) 0;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 0.1rem 0;
+        }
+
+        .nav-container {
+            width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 clamp(0.5rem, 2vw, 1rem);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: clamp(0.5rem, 2vw, 1rem);
+        }
+
+        .logo-img {
+            width: clamp(2.5rem, 6vw, 3.5rem);
+            height: clamp(2.5rem, 6vw, 3.5rem);
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.1);
+        }
+
+        .logo-text {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-weight: 700;
+            color: #333;
+            text-decoration: none;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: clamp(0.5rem, 2vw, 1rem);
+            margin: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            padding: clamp(0.3rem, 1vw, 0.5rem) clamp(0.5rem, 2vw, 1rem);
+            border-radius: 25px;
+            transition: var(--transition);
+            position: relative;
+            font-size: var(--small-text);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            left: 0;
+            right: auto;
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-btn {
+            font-size: clamp(1.5rem, 4vw, 1.8rem);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-color);
+            display: none;
+            transition: transform 0.3s ease;
+            padding: clamp(0.3rem, 1vw, 0.5rem);
+        }
+
+        .mobile-menu-btn:hover {
+            transform: rotate(90deg);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: clamp(5rem, 10vw, 8rem) clamp(1rem, 3vw, 2rem) clamp(2rem, 5vw, 4rem);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://color-hex.org/colors/e9dfc3.png') no-repeat center center/cover;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .hero-content {
+            width: var(--container-width);
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: clamp(1rem, 3vw, 2rem);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: var(--h1-size);
+            font-weight: 900;
+            line-height: 1.2;
+            color: var(--secondary-color);
+            margin-bottom: clamp(0.5rem, 1.5vw, 1rem);
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: #444;
+            max-width: min(100%, 600px);
+            margin-bottom: clamp(0.5rem, 2vw, 1rem);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: clamp(0.5rem, 2vw, 1rem);
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: clamp(0.5rem, 1.5vw, 0.8rem) clamp(1rem, 3vw, 1.8rem);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: var(--text-size);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: clamp(0.3rem, 1vw, 0.5rem);
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(74, 108, 247, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74, 108, 247, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: #f5f7ff;
+            transform: translateY(-3px);
+        }
+
+        .stats {
+            display: flex;
+            gap: clamp(0.5rem, 2vw, 1rem);
+            margin-top: clamp(1rem, 3vw, 2rem);
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: clamp(0.8rem, 2vw, 1rem);
+            border-radius: var(--border-radius);
+            min-width: min(100%, 8rem);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            flex: 1 1 min(100%, 8rem);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: clamp(0.2rem, 1vw, 0.5rem);
+        }
+
+        .stat-label {
+            font-size: var(--small-text);
+            color: var(--light-text);
+        }
+
+        /* Sections */
+        .section {
+            padding: var(--section-padding) clamp(1rem, 3vw, 2rem);
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: var(--h2-size);
+            margin-bottom: clamp(0.5rem, 1.5vw, 1rem);
+            color: var(--secondary-color);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 100%;
+            height: clamp(2px, 0.5vw, 4px);
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: var(--text-size);
+            color: var(--light-text);
+            max-width: min(95%, 700px);
+            margin: 0 auto clamp(1.5rem, 3vw, 2rem);
+            line-height: 1.5;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+            gap: clamp(1rem, 3vw, 2rem);
+            width: var(--container-width);
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: clamp(1rem, 3vw, 2rem);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-0.5rem);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: clamp(4rem, 10vw, 5rem);
+            height: clamp(4rem, 10vw, 5rem);
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto clamp(0.8rem, 2vw, 1.5rem);
+            color: var(--white);
+            font-size: clamp(1.5rem, 4vw, 2rem);
+        }
+
+        .feature-title {
+            font-size: var(--h3-size);
+            margin-bottom: clamp(0.5rem, 1.5vw, 1rem);
+            color: var(--secondary-color);
+        }
+
+        .feature-desc {
+            color: var(--light-text);
+            line-height: 1.6;
+            font-size: var(--text-size);
+        }
+
+        /* Workout Programs */
+        .programs-container {
+            width: var(--container-width);
+            margin: 0 auto;
+        }
+
+        .program-tabs {
+            display: flex;
+            justify-content: center;
+            gap: clamp(0.5rem, 2vw, 1rem);
+            margin-bottom: clamp(1rem, 3vw, 2rem);
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: clamp(0.5rem, 1.5vw, 0.8rem) clamp(1rem, 2vw, 1.5rem);
+            border-radius: 50px;
+            background: var(--white);
+            border: 2px solid #e0e0e0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: var(--small-text);
+            white-space: nowrap;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: var(--white);
+            border-color: transparent;
+        }
+
+        .tab-btn:hover:not(.active) {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .program-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .program-content.active {
+            display: block;
+        }
+
+        .program-details {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: clamp(1rem, 3vw, 2rem);
+            box-shadow: var(--shadow);
+        }
+
+        .program-title {
+            font-size: var(--h3-size);
+            color: var(--secondary-color);
+            margin-bottom: clamp(0.5rem, 1.5vw, 1rem);
+        }
+
+        .program-desc {
+            color: var(--light-text);
+            margin-bottom: clamp(0.8rem, 2vw, 1.5rem);
+            line-height: 1.6;
+            font-size: var(--text-size);
+        }
+
+        .program-schedule {
+            margin-top: clamp(1rem, 3vw, 2rem);
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: clamp(0.5rem, 1.5vw, 1rem);
+            font-size: var(--small-text);
+        }
+
+        .schedule-table th, .schedule-table td {
+            padding: clamp(0.5rem, 1.5vw, 1rem);
+            text-align: right;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .schedule-table th {
+            background: #f5f7ff;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .schedule-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Testimonials */
+        .testimonials-container {
+            width: var(--container-width);
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonials-slider {
+            display: flex;
+            gap: clamp(1rem, 3vw, 2rem);
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding: clamp(0.5rem, 2vw, 1rem) 0;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .testimonials-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .testimonial-card {
+            min-width: min(300px, 85vw);
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: clamp(1rem, 3vw, 1.5rem);
+            box-shadow: var(--shadow);
+            scroll-snap-align: start;
+            flex: 0 0 auto;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #555;
+            margin-bottom: clamp(0.8rem, 2vw, 1.5rem);
+            line-height: 1.6;
+            font-size: var(--text-size);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: clamp(0.5rem, 2vw, 1rem);
+        }
+
+        .author-avatar {
+            width: clamp(3rem, 8vw, 4rem);
+            height: clamp(3rem, 8vw, 4rem);
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+        }
+
+        .author-info h4 {
+            color: var(--secondary-color);
+            margin-bottom: 0.2rem;
+            font-size: var(--text-size);
+        }
+
+        .author-info p {
+            color: #777;
+            font-size: var(--small-text);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: var(--white);
+            padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1538805060514-97d9cc17730c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80') no-repeat center center/cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .cta-content {
+            width: var(--container-width);
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-size: var(--h2-size);
+            margin-bottom: clamp(1rem, 2vw, 1.5rem);
+        }
+
+        .cta-text {
+            font-size: var(--text-size);
+            margin-bottom: clamp(1rem, 3vw, 2rem);
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem);
+        }
+
+        .footer-container {
+            width: var(--container-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+            gap: clamp(1.5rem, 4vw, 3rem);
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: clamp(0.5rem, 2vw, 1rem);
+            margin-bottom: clamp(0.8rem, 2vw, 1.5rem);
+        }
+
+        .footer-logo-img {
+            width: clamp(2.5rem, 6vw, 3.5rem);
+            height: clamp(2.5rem, 6vw, 3.5rem);
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+        }
+
+        .footer-logo-text {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .footer-about {
+            margin-bottom: clamp(0.8rem, 2vw, 1.5rem);
+            opacity: 0.8;
+            line-height: 1.6;
+            font-size: var(--small-text);
+        }
+
+        .social-links {
+            display: flex;
+            gap: clamp(0.5rem, 2vw, 1rem);
+        }
+
+        .social-link {
+            width: clamp(2rem, 5vw, 2.5rem);
+            height: clamp(2rem, 5vw, 2.5rem);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: var(--text-size);
+        }
+
+        .social-link:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-title {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            margin-bottom: clamp(0.8rem, 2vw, 1.5rem);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: clamp(2rem, 5vw, 3rem);
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: clamp(0.4rem, 1.5vw, 0.8rem);
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: clamp(0.3rem, 1vw, 0.5rem);
+            font-size: var(--small-text);
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+            transform: translateX(-5px);
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: clamp(0.5rem, 2vw, 1rem);
+            margin-bottom: clamp(0.5rem, 1.5vw, 1rem);
+        }
+
+        .footer-contact-icon {
+            width: clamp(2rem, 5vw, 2.5rem);
+            height: clamp(2rem, 5vw, 2.5rem);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-size);
+        }
+
+        .footer-contact-item span {
+            font-size: var(--small-text);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: clamp(1rem, 3vw, 1.5rem);
+            margin-top: clamp(1rem, 3vw, 1.5rem);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: var(--small-text);
+            width: var(--container-width);
+            margin: 0 auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 1rem;
+                border-radius: 0 0 15px 15px;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding-top: clamp(4rem, 10vw, 6rem);
+                text-align: center;
+                align-items: flex-start;
+            }
+
+            .hero-content {
+                align-items: center;
+                text-align: center;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+
+            .stats {
+                justify-content: center;
+            }
+
+            .section {
+                padding: clamp(1.5rem, 5vw, 3rem) clamp(1rem, 3vw, 1.5rem);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: clamp(1rem, 4vw, 1.2rem);
+            }
+            
+            .logo-img {
+                width: clamp(2rem, 8vw, 3rem);
+                height: clamp(2rem, 8vw, 3rem);
+            }
+            
+            .hero-title {
+                font-size: clamp(1.5rem, 6vw, 2rem);
+            }
+
+            .hero-subtitle {
+                font-size: clamp(0.9rem, 3vw, 1.1rem);
+            }
+
+            .btn {
+                padding: clamp(0.5rem, 3vw, 0.7rem) clamp(0.8rem, 4vw, 1.2rem);
+                font-size: clamp(0.8rem, 3vw, 0.9rem);
+            }
+
+            .stat-item {
+                min-width: min(100%, 7rem);
+                padding: clamp(0.5rem, 2vw, 0.8rem);
+            }
+
+            .stat-number {
+                font-size: clamp(1.2rem, 5vw, 1.8rem);
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: clamp(1rem, 4vw, 1.5rem);
+            }
+        }
+
+        /* Extra Large Screens */
+        @media (min-width: 2000px) {
+            :root {
+                --base-size: 18px;
+                --h1-size: 4rem;
+                --h2-size: 3rem;
+                --h3-size: 2.5rem;
+                --text-size: 1.2rem;
+                --small-text: 1rem;
+            }
+            
+            .feature-icon {
+                width: 6rem;
+                height: 6rem;
+                font-size: 2.5rem;
+            }
+            
+            .btn {
+                padding: 1rem 2.5rem;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Modern Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-section">
+                <img src="https://i.pinimg.com/736x/1e/55/a5/1e55a584f7f02fb17ea209607fbc6a7a.jpg" alt="Logo" class="logo-img">
+                <a href="#" class="logo-text">الجد عبده 💪</a>
+            </div>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active">الرئيسية</a></li>
+                <li><a href="workout.html">التمارين</a></li>
+                <li><a href="tracker.html">تتبع التمارين</a></li>
+                <li><a href="streches.html">الاسترتشات</a></li>
+            </ul>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">احترف <span>اللياقة البدنية</span> مع الجد عبده</h1>
+            <p class="hero-subtitle">برامج تدريبية متكاملة، تتبع دقيق للإنجازات، واسترتشات علمية لتحقيق أقصى استفادة من تمارينك</p>
+            
+            <div class="cta-buttons">
+                <a href="workout.html" class="btn btn-primary">
+                    <i class="fas fa-dumbbell"></i> ابدأ التمارين
+                </a>
+                <a href="#programs" class="btn btn-secondary">
+                    <i class="fas fa-list"></i> تصفح البرامج
+                </a>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">7+</div>
+                    <div class="stat-label">برامج تدريبية</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">تمرين مختلف</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">نتائج مضمونة</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section">
+        <h2 class="section-title">لماذا تختارنا؟</h2>
+        <p class="section-subtitle">نقدم لك كل ما تحتاجه لتحقيق أهدافك الرياضية باحترافية</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-dumbbell"></i>
+                </div>
+                <h3 class="feature-title">برامج متكاملة</h3>
+                <p class="feature-desc">خطط تدريبية مصممة علمياً لجميع مستويات اللياقة، من المبتدئين إلى المحترفين</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="feature-title">تتبع التقدم</h3>
+                <p class="feature-desc">سجل تقدمك الأسبوعي واحصل على تحليلات دقيقة لتطور أدائك وقوتك</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <h3 class="feature-title">إرشادات علمية</h3>
+                <p class="feature-desc">تمارين واسترتشات مبنية على أحدث الدراسات العلمية في مجال اللياقة</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3 class="feature-title">متاح دائماً</h3>
+                <p class="feature-desc">تصميم متجاوب يعمل على جميع الأجهزة، متاح كتطبيق ويب (PWA)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workout Programs -->
+    <section class="section" id="programs">
+        <h2 class="section-title">برامجنا التدريبية</h2>
+        <p class="section-subtitle">اختر البرنامج الذي يناسب أهدافك ومستواك</p>
+        
+        <div class="programs-container">
+            <div class="program-tabs">
+                <button class="tab-btn active" data-tab="ppl">PPL + Upper Body</button>
+                <button class="tab-btn" data-tab="fullbody">Full Body</button>
+                <button class="tab-btn" data-tab="strength">Strength Training</button>
+            </div>
+            
+            <div class="program-content active" id="ppl">
+                <div class="program-details">
+                    <h3 class="program-title">برنامج PPL + Upper Body</h3>
+                    <p class="program-desc">
+                        برنامج متكامل يجمع بين نظام PPL التقليدي مع تركيز إضافي على الجزء العلوي من الجسم. مثالي لبناء القوة والكتلة العضلية مع تحسين التناسق بين المجموعات العضلية.
+                    </p>
+                    
+                    <div class="program-schedule">
+                        <h4>جدول الأسبوع:</h4>
+                        <table class="schedule-table">
+                            <thead>
+                                <tr>
+                                    <th>اليوم</th>
+                                    <th>نوع التمرين</th>
+                                    <th>المجموعات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>الإثنين</td>
+                                    <td>Push (صدر + كتف أمامي + تراي)</td>
+                                    <td>7 تمارين</td>
+                                </tr>
+                                <tr>
+                                    <td>الثلاثاء</td>
+                                    <td>Pull (ظهر + بايسبس)</td>
+                                    <td>7 تمارين</td>
+                                </tr>
+                                <tr>
+                                    <td>الأربعاء</td>
+                                    <td>راحة</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>الخميس</td>
+                                    <td>Legs (أرجل)</td>
+                                    <td>7 تمارين</td>
+                                </tr>
+                                <tr>
+                                    <td>الجمعة</td>
+                                    <td>راحة</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>السبت</td>
+                                    <td>Full Body (تمرين كامل)</td>
+                                    <td>7 تمارين</td>
+                                </tr>
+                                <tr>
+                                    <td>الأحد</td>
+                                    <td>راحة</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <a href="workout.html" class="btn btn-primary" style="margin-top: 1.5rem;">
+                        <i class="fas fa-play"></i> ابدأ البرنامج
+                    </a>
+                </div>
+            </div>
+            
+            <div class="program-content" id="fullbody">
+                <div class="program-details">
+                    <h3 class="program-title">برنامج Full Body</h3>
+                    <p class="program-desc">
+                        برنامج تدريب كامل الجسم في كل جلسة، مثالي للمبتدئين أو الذين يرغبون في تمرين جميع العضلات 3 مرات أسبوعياً. يعزز التوازن العضلي والتنسيق بين المجموعات.
+                    </p>
+                    
+                    <div class="program-schedule">
+                        <h4>جدول الأسبوع:</h4>
+                        <table class="schedule-table">
+                            <thead>
+                                <tr>
+                                    <th>اليوم</th>
+                                    <th>نوع التمرين</th>
+                                    <th>المجموعات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>الإثنين</td>
+                                    <td>Full Body A</td>
+                                    <td>8 تمارين</td>
+                                </tr>
+                                <tr>
+                                    <td>الثلاثاء</td>
+                                    <td>راحة</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>الأربعاء</td>
+                                    <td>Full Body B</td>
+                                    <td>8 تمارين</td>
+                                </tr>
+                                <tr>
+                                    <td>الخميس</td>
+                                    <td>راحة</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>الجمعة</td>
+                                    <td>Full Body C</td>
+                                    <td>8 تمارين</td>
+                                </tr>
+                                <tr>
+                                    <td>السبت</td>
+                                    <td>راحة</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>الأحد</td>
+                                    <td>راحة</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <a href="workout.html" class="btn btn-primary" style="margin-top: 1.5rem;">
+                        <i class="fas fa-play"></i> ابدأ البرنامج
+                    </a>
+                </div>
+            </div>
+            
+            <div class="program-content" id="strength">
+                <div class="program-details">
+                    <h3 class="program-title">برنامج Strength Training</h3>
+                    <p class="program-desc">
+                        برنامج متخصص لبناء القوة العضلية مع التركيز على التمارين الأساسية المركبة. يعتمد على نظام التكرارات المنخفضة والأوزان العالية لتحفيز الألياف العضلية سريعة الانقباض.
+                    </p>
+                    
+                    <div class="program-schedule">
+                        <h4>جدول الأسبوع:</h4>
+                        <table class="schedule-table">
+                            <thead>
+                                <tr>
+                                    <th>اليوم</th>
+                                    <th>نوع التمرين</th>
+                                    <th>المجموعات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>الإثنين</td>
+                                    <td>Lower Body Strength</td>
+                                    <td>5 تمارين</td>
+                                </tr>
+                                <tr>
+                                    <td>الثلاثاء</td>
+                                    <td>راحة</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>الأربعاء</td>
+                                    <td>Upper Body Strength</td>
+                                    <td>5 تمارين</td>
+                                </tr>
+                                <tr>
+                                    <td>الخميس</td>
+                                    <td>راحة</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>الجمعة</td>
+                                    <td>Full Body Strength</td>
+                                    <td>5 تمارين</td>
+                                </tr>
+                                <tr>
+                                    <td>السبت</td>
+                                    <td>راحة</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>الأحد</td>
+                                    <td>راحة</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <a href="workout.html" class="btn btn-primary" style="margin-top: 1.5rem;">
+                        <i class="fas fa-play"></i> ابدأ البرنامج
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" style="background: #f9faff;">
+        <h2 class="section-title">آراء المتدربين</h2>
+        <p class="section-subtitle">قصص نجاح من أشخاص حققوا أهدافهم معنا</p>
+        
+        <div class="testimonials-container">
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "بفضل برنامج PPL + Upper Body، تمكنت من زيادة قوتي بشكل ملحوظ في 3 أشهر فقط. الأوزان التي كنت أعتبرها مستحيلة أصبحت سهلة الآن!"
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ahmed" class="author-avatar">
+                        <div class="author-info">
+                            <h4>أحمد محمود</h4>
+                            <p>تدرب معنا منذ 6 أشهر</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "كنت أعاني من آلام الظهر المستمرة، ولكن بعد اتباع برنامج Full Body مع الاسترتشات اليومية، اختفت الآلام وتحسنت مرونتي بشكل كبير."
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://i.pinimg.com/736x/23/0b/0e/230b0eacc5c41dc9d666a3e1ca979315.jpg" alt="Mona" class="author-avatar">
+                        <div class="author-info">
+                            <h4>منى عبدالله</h4>
+                            <p>تدرب معنا منذ 4 أشهر</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "الاسترتشات العلمية غيرت تجربتي تماماً، أصبحت أكثر مرونة وتقلصت آلام العضلات بعد التمرين. البرامج واضحة وسهلة المتابعة حتى للمبتدئين."
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Noura" class="author-avatar">
+                        <div class="author-info">
+                            <h4>نورة محمد</h4>
+                            <p>تدرب معنا منذ 3 أشهر</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">جاهز لبدء رحلتك الرياضية؟</h2>
+            <p class="cta-text">سجل الآن واحصل على خطة تدريبية شخصية مجاناً لمدة أسبوع</p>
+            <a href="workout.html" class="btn btn-primary" style="font-size: clamp(1rem, 2vw, 1.2rem); padding: clamp(0.8rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2.5rem);">
+                <i class="fas fa-rocket"></i> ابدأ الآن مجاناً
+            </a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <div class="footer-logo">
+                    <img src="https://i.pinimg.com/736x/1e/55/a5/1e55a584f7f02fb17ea209607fbc6a7a.jpg" alt="Logo" class="footer-logo-img">
+                    <span class="footer-logo-text">الجد عبده</span>
+                </div>
+                <p class="footer-about">
+                    منصة متكاملة للتدريب المنزلي واللياقة البدنية، نقدم برامج علمية مدروسة لمساعدة الجميع على تحقيق أهدافهم الرياضية بغض النظر عن مستواهم الحالي.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3 class="footer-title">روابط سريعة</h3>
+                <ul class="footer-links">
+                    <li><a href="home"><i class="fas fa-chevron-left"></i> الرئيسية</a></li>
+                    <li><a href="workout.html"><i class="fas fa-chevron-left"></i> التمارين</a></li>
+                    <li><a href="tracker.html"><i class="fas fa-chevron-left"></i> تتبع التمارين</a></li>
+                    <li><a href="streches.html"><i class="fas fa-chevron-left"></i> الاسترتشات</a></li>
+                    <li><a href="#programs"><i class="fas fa-chevron-left"></i> البرامج التدريبية</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3 class="footer-title">المصادر</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> المدونة</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> الأسئلة الشائعة</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> سياسة الخصوصية</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> شروط الاستخدام</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3 class="footer-title">تواصل معنا</h3>
+                <div class="footer-contact-item">
+                    <div class="footer-contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <span>القاهرة، مصر</span>
+                </div>
+                <div class="footer-contact-item">
+                    <div class="footer-contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <span>info@aljedabdo.com</span>
+                </div>
+                <div class="footer-contact-item">
+                    <div class="footer-contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <span>+20 123 456 7890</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>جميع الحقوق محفوظة &copy; <span id="current-year">2023</span> الجد عبده | تصميم وتطوير فريق الجد عبده</p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Tab Switching
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.program-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Navbar Scroll Effect
+        const navbar = document.querySelector('.navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+        
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
